@@ -8,10 +8,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Outlet } from 'react-router-dom';
 
 function App() {
+  const navElements = [
+    { label: 'Home', path: '/' },
+    { label: 'Ad Panel', path: '/ad-panel' },
+    { label: 'New Ad', path: '/new-ad' },
+  ];
   return (
     <main>
       <CssBaseline />
-      <NavBar />
+      <NavBar navElements={navElements} />
       <div>
         <Outlet />
       </div>

@@ -2,17 +2,17 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useLocation, NavLink } from 'react-router';
 
-export default function NavBar() {
+interface NavBarInterface {
+  navElements: { label: string; path: string }[];
+}
+
+export default function NavBar({ navElements }: NavBarInterface) {
   const { pathname } = useLocation();
   return (
     <Tabs value={pathname}>
-      <Tab label="Home" value="/" to="/" component={NavLink} />
-      <Tab
-        label="Add Panel"
-        value="/add-panel"
-        to="/add-panel"
-        component={NavLink}
-      />
+      {navElements.map(({ label, path }, i) => (
+        <Tab key={i} label={label} value={path} to={path} component={NavLink} />
+      ))}
     </Tabs>
   );
 }

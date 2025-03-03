@@ -6,8 +6,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './components/App.tsx';
 import Loader from './components/Loader.tsx';
 
-const HomePage = React.lazy(() => import('./pages/HomePage.jsx'));
-const AddPanelPage = React.lazy(() => import('./pages/AddPanelPage.jsx'));
+const HomePage = React.lazy(() => import('./pages/HomePage.tsx'));
+const AdPanelPage = React.lazy(() => import('./pages/AdPanelPage.tsx'));
+const NewAd = React.lazy(() => import('./pages/NewAd.tsx'));
 
 const router = createBrowserRouter([
   {
@@ -25,10 +26,19 @@ const router = createBrowserRouter([
         errorElement: <p>error</p>,
       },
       {
-        path: 'add-panel',
+        path: 'ad-panel',
         element: (
           <React.Suspense fallback={<Loader />}>
-            <AddPanelPage />
+            <AdPanelPage />
+          </React.Suspense>
+        ),
+        errorElement: <p>error</p>,
+      },
+      {
+        path: 'new-ad',
+        element: (
+          <React.Suspense fallback={<Loader />}>
+            <NewAd />
           </React.Suspense>
         ),
         errorElement: <p>error</p>,
