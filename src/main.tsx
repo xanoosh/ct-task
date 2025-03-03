@@ -1,8 +1,10 @@
 import './index.css';
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import App from './components/App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import App from './components/App.tsx';
+import Loader from './components/Loader.tsx';
 
 const HomePage = React.lazy(() => import('./pages/HomePage.jsx'));
 const AddPanelPage = React.lazy(() => import('./pages/AddPanelPage.jsx'));
@@ -16,7 +18,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <React.Suspense fallback={<p>loader</p>}>
+          <React.Suspense fallback={<Loader />}>
             <HomePage />
           </React.Suspense>
         ),
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
       {
         path: 'add-panel',
         element: (
-          <React.Suspense fallback={<p>loader</p>}>
+          <React.Suspense fallback={<Loader />}>
             <AddPanelPage />
           </React.Suspense>
         ),
@@ -35,8 +37,12 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
