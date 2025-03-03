@@ -1,4 +1,4 @@
-# CT Task (Add panel PoC)
+# CT Task (Advertisement panel PoC)
 
 Simple proof of concept app, technologies used:
 
